@@ -1,7 +1,10 @@
+import axios, { AxiosResponse } from 'axios'
+
 interface UserProps {
-  name: string,
-  age: number,
-  [key: string]: string | number | undefined,
+  id?: number
+  name?: string
+  age?: number
+  [key: string]: string | number | undefined
 }
 
 type Callback = () => void
@@ -17,7 +20,7 @@ export class User {
     return this.data[propName]
   }
 //
-  set (update: Partial<UserProps>):void {
+  set (update: UserProps):void {
     this.data = {
       ...this.data,
       ...update
@@ -40,6 +43,15 @@ export class User {
     });
   }
 
-  // fetch (): Promise { }
-  // save(): Promise {}
+  fetch (): void {
+    axios.get(`http://localhost:3000/users/${this.get('id')}`)
+      .then((response: AxiosResponse): void => {
+        console.log(response)
+        this.set(response.data)
+    })
+  }
+
+  save (): void {
+    
+  }
 }
