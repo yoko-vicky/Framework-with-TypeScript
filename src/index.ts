@@ -15,3 +15,7 @@ console.log(user.get('age'))
 user.set({ name: 'Snoopy', age: 1000 })
 console.log(user.get('name'))
 console.log(user.get('age'))
+
+
+user.on('click', () => { console.log('hello')})
+console.log(user.events)
