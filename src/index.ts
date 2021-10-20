@@ -17,5 +17,6 @@ console.log(user.get('name'))
 console.log(user.get('age'))
 
 
-user.on('click', () => { console.log('hello')})
+user.on('click', () => { console.log('this is click events')})
 console.log(user.events)
+user.trigger('click')
