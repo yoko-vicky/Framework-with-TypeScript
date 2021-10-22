@@ -2,9 +2,17 @@ import { User } from "./models/User";
 
 const user = new User({ name: 'Asahi', age: 41 })
 
-user.attributes.get('id')
-user.attributes.get('name')
-user.attributes.get('age')
-user.on('change', () => {
-  console.log('POhasjlasjkal')
-});
+console.log(user.get('id'))
+console.log(user.get('name'))
+console.log(user.get('age'))
+
+
+// Reminder how 'this' works in JavaScript
+
+const colors = {
+  color: 'red',
+  printColor () {
+    console.log(this.color)
+  }
+}
+colors.printColor()
