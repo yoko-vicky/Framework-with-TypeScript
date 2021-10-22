@@ -6,7 +6,6 @@ export interface UserProps {
   id?: number
   name?: string
   age?: number
-  [key: string]: string | number | undefined
 }
 
 const rootUrl = 'http://localhost3000/users'
@@ -14,5 +13,9 @@ const rootUrl = 'http://localhost3000/users'
 export class User {
   public events: Eventing = new Eventing()
   public sync: Sync<UserProps> = new Sync<UserProps>(rootUrl)
-  // public attributes: Attributes<UserProps> = new Attributes<UserProps>()
+  public attributes: Attributes<UserProps>
+
+  constructor(attrs: UserProps) {
+    this.attributes = new Attributes(attrs)
+  }
 }
