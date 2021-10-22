@@ -1,6 +1,7 @@
 import { Eventing } from './Eventing'
 import { Sync } from './Sync'
 import { Attributes } from './Attributes'
+import { AxiosResponse } from 'axios';
 
 export interface UserProps {
   id?: number
@@ -29,5 +30,20 @@ export class User {
 
   get get () {
     return this.attributes.get
+  }
+
+  set (update: UserProps): void {
+    this.attributes.set(update)
+    this.events.trigger('change')
+  }
+
+  save ():void {
+    this.sync.save(this.attributes.getAll())
+      .then((response: AxiosResponse):void  => {
+        this.trigger('save')
+      })
+      .catch((error) => {
+        this.trigger('error')
+      })
   }
 }
