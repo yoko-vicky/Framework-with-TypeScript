@@ -2,18 +2,13 @@
   "users": [
     {
       "id": 1,
-      "name": "yocotan",
-      "age": 11
+      "name": "newer name",
+      "age": 0
     },
     {
-      "name": "Asahi",
-      "age": 41,
+      "name": "new record",
+      "age": 0,
       "id": 2
-    },
-    {
-      "name": "Mario",
-      "age": 21,
-      "id": 3
     }
   ]
 }
