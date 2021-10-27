@@ -1,7 +1,7 @@
-import { Eventing } from './Eventing'
-import { Sync } from './Sync'
+import { Model } from './Model'
+import { ApiSync } from './ApiSync'
 import { Attributes } from './Attributes'
-import { AxiosResponse } from 'axios';
+import { Eventing } from './Eventing'
 
 export interface UserProps {
   id?: number
@@ -11,39 +11,18 @@ export interface UserProps {
 
 const rootUrl = 'http://localhost3000/users'
 
-export class User {
-  public events: Eventing = new Eventing()
-  public sync: Sync<UserProps> = new Sync<UserProps>(rootUrl)
-  public attributes: Attributes<UserProps>
-
-  constructor(attrs: UserProps) {
-    this.attributes = new Attributes(attrs)
-  }
-
-  get on () {
-    return this.events.on
-  }
-
-  get trigger () {
-    return this.events.trigger
-  }
-
-  get get () {
-    return this.attributes.get
-  }
-
-  set (update: UserProps): void {
-    this.attributes.set(update)
-    this.events.trigger('change')
-  }
-
-  save ():void {
-    this.sync.save(this.attributes.getAll())
-      .then((response: AxiosResponse):void  => {
-        this.trigger('save')
-      })
-      .catch((error) => {
-        this.trigger('error')
-      })
+export class User extends Model<UserProps>{
+  static buildUser (attrs: UserProps): User {
+    return new User(
+      new Attributes<UserProps>(attrs),
+      new Eventing(),
+      new ApiSync<UserProps>(rootUrl)
+      )
   }
 }
+
+// const user = User.buildUser({id: 1, name: 'Vicky', age: 30})
+// user.get('id')
+// user.get('name')
+// user.get('age')
+// user.fetch()
