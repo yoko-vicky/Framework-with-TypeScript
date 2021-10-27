@@ -10,5 +10,6 @@ collection.fetch()
 
 
 // CREATE AND RENDER USER FORM IN DOM
-const form = new UserForm(document.getElementById('app'))
+const user = User.buildUser({id: 5, name: 'Hana', age: 20})
+const form = new UserForm(document.getElementById('app'), user)
 form.render()
