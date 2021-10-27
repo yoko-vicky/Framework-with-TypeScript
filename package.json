@@ -1,27 +1,12 @@
 {
-  "name": "framework-with-typescript",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start:db": "json-server -w db.json",
-    "start:parcel": "parcel index.html"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yocosaka/Framework-with-TypeScript.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/yocosaka/Framework-with-TypeScript/issues"
-  },
-  "homepage": "https://github.com/yocosaka/Framework-with-TypeScript#readme",
   "devDependencies": {
     "typescript": "^4.4.3"
   },
   "dependencies": {
-    "axios": "^0.24.0"
+    "axios": "^0.21.4"
+  },
+  "scripts": {
+    "start:db": "json-server -w db.json",
+    "start:parcel": "parcel index.html"
   }
 }
