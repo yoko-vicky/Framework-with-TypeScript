@@ -3,12 +3,21 @@ export class UserForm {
     public parent: Element
   ) { }
 
+  eventsMap (): { [key: string]: ()=>void }{
+    return {
+      'click:button': this.onButtonClick
+    }
+  }
+  onButtonClick ():void {
+    console.log('Hi there')
+  }
+
   template (): string {
     return `
     <div>
       <h1>User Form</h1>
       <input />
-      <button>Submit</button>
+      <button>Click</button>
     </div>
     `
   }
