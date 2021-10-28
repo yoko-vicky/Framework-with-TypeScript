@@ -1,18 +1,8 @@
-import { User } from '../models/User'
+import { View } from './View'
+import { User, UserProps } from '../models/User'
 
-export class UserForm {
-  constructor(
-    public parent: Element,
-    public model: User
-  ) {
-    this.bindModel()
-  }
 
-  bindModel ():void {
-    this.model.on('change', () => {
-      this.render()
-    })
-  }
+export class UserForm extends View<User, UserProps>{
 
   eventsMap (): { [key: string]: ()=>void }{
     return {
@@ -42,27 +32,5 @@ export class UserForm {
       <button class="set-age">Set Random Age</button>
     </div>
     `
-  }
-
-  // NOTE: The content of templates are of the DocumentFragment type
-  bindEvents (fragment: DocumentFragment): void {
-    const eventsMap = this.eventsMap()
-
-    for (let eventKey in eventsMap) {
-      const [eventName, selector] = eventKey.split(':')
-
-      fragment.querySelectorAll(selector).forEach((element) => {
-        element.addEventListener(eventName, eventsMap[eventKey])
-      })
-    }
-  }
-  render (): void {
-    this.parent.innerHTML = ''
-    const templateElement = document.createElement('template')
-    templateElement.innerHTML = this.template()
-
-    // Bind events to template fragment(content) using eventsMap
-    this.bindEvents(templateElement.content)
-    this.parent.appendChild(templateElement.content)
   }
 }
