@@ -1,16 +1,20 @@
-import { User } from "./models/User";
-import { UserEdit } from "./views/UserEdit";
+import { UserList } from './views/UserList';
+import { Collection } from './models/Collection';
+import { UserProps, User } from './models/User';
 
-// CREATE USER COLLECTION OBJECT
-const collection = User.buildUserCollecton()
-collection.on('change', () => {
-  console.log(collection)
+const users = new Collection(
+  'http://localhost:3000/users',
+  (json: UserProps) => {
+    return User.buildUser(json);
+  }
+);
+
+users.on('change', () => {
+  const root = document.getElementById('app');
+
+  if (root) {
+    new UserList(root, users).render();
+  }
 });
-collection.fetch()
 
-
-// CREATE AND RENDER USER EDIT IN DOM
-const user = User.buildUser({name: 'Onimaru', age: 20})
-const userEdit = new UserEdit(document.getElementById('app') as HTMLElement, user)
-userEdit.render()
-console.log(userEdit)
+users.fetch();
