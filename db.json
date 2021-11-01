@@ -2,13 +2,23 @@
   "users": [
     {
       "id": 1,
-      "name": "newer name",
-      "age": 0
+      "name": "Hana",
+      "age": 20
     },
     {
       "name": "new record",
       "age": 0,
       "id": 2
+    },
+    {
+      "name": "Hanamaru",
+      "age": 20,
+      "id": 3
+    },
+    {
+      "name": "Onimaru",
+      "age": 67,
+      "id": 4
     }
   ]
 }
